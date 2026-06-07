@@ -86,7 +86,7 @@ namespace GameVault.API.Services
                 existingUsuario.Role = usuario.Role;
             }
 
-            // esto hace que se actualice el objeto completo, o sea obliga a cambiar reescribir todos los campos
+            // esto hace que se actualice el objeto completo, o sea obliga a reescribir todos los campos
             //if (existingUsuario != null)
             //{
             //    existingUsuario.UserName = usuario.UserName;
