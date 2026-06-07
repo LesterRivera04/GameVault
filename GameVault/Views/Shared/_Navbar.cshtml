@@ -1,0 +1,44 @@
+﻿<nav class="navbar navbar-expand-lg gv-navbar fixed-top px-4">
+    <div class="container-fluid">
+
+        <a class="gv-logo" asp-controller="Home" asp-action="Index">
+            @* <img src="~/images/GameVault icon.png" alt="GameVault Logo" width="100" height="100"  /> *@
+            <i class="fa-solid fa-gamepad"></i>
+            @* <i class="bi bi-controller"></i> *@
+            GameVault
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gvNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="gvNavbar">
+
+            <ul class="navbar-nav me-auto ms-4">
+
+                <li class="nav-item">
+                    <a class="nav-link gv-nav-link" asp-controller="Games" asp-action="Index">Games</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link gv-nav-link" asp-controller="Library" asp-action="Index">My Library</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link gv-nav-link" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                </li>
+
+            </ul>
+
+            <div class="d-flex gap-2">
+
+                <a class="btn gv-btn-secondary" asp-controller="Auth" asp-action="Login">Login</a>
+
+                <a class="btn gv-btn-primary" asp-controller="Auth" asp-action="Register">Register</a>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>

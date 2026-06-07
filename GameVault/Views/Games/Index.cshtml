@@ -1,0 +1,117 @@
+﻿@model GamesViewModel
+
+<form asp-action="Index" method="get">
+    <div class="gv-filter-banner">
+    <div class="row g-3 align-items-end">
+        @* <h5 class="gv-filter-title">Find your next adventure</h5> *@
+        <div class="col-md-4">
+            <label class="form-label">Search</label>
+            <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="&#x1F50D Search" />
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Genre</label>
+            <select name="genreId" class="form-select">
+                <option value="">All Genres</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Platform</label>
+            <select name="platformId" class="form-select">
+                <option value="">All Platforms</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn gv-btn-primary w-100">Search</button>
+        </div>
+    </div>
+</div>
+</form>
+
+<div class="container-fluid">
+    @if (!Model.Games.Any())
+    {
+        <div class="container alert alert-info text-center">
+            <h5>⚠ No games found, edit your filters and try again!</h5>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 row-cols-md-4 row-cols-xl-5 g-4">
+
+        @foreach (var game in Model.Games)
+        {
+            <div class="col"> @* col-12 col-md-6 col-lg-4 col-xl-3 *@
+
+                <partial name="_GameCard" model="game" />
+
+            </div>
+        }
+
+        </div>
+    }
+    
+
+    @{
+        int currentPage = Model.CurrentPage;
+        int totalPages = Model.TotalPages;
+        int startPage = Math.Max(1, currentPage - 2);
+        int endPage = Math.Min(startPage + 4, totalPages);
+    }
+
+    <div class="position-relative">
+        <div class="d-flex justify-content-center align-items-center mt-4 gap-2">
+            <!-- BACK -->
+            <a class="btn gv-page-btn btn-outline-light"
+               asp-action="Index"
+               asp-route-page="@(Math.Max(1, currentPage - 1))"
+               asp-route-search="@ViewBag.Search"
+               asp-route-genreId="@ViewBag.GenreId"
+               asp-route-platformId="@ViewBag.PlatformId">
+                Previous
+            </a>
+        
+            <!-- page numbers -->
+            <div class="d-flex gap-2">
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    <a class="gv-page-number @(i == currentPage ? "active" : "")"
+                    asp-action="Index"
+                    asp-route-page="@i"
+                    asp-route-search="@ViewBag.Search"
+                    asp-route-genreId="@ViewBag.GenreId"
+                    asp-route-platformId="@ViewBag.PlatformId">
+                    @i
+                </a>
+                }
+            </div>
+
+            <!-- NEXT -->
+            <a class="btn gv-page-btn btn-outline-light"
+               asp-action="Index"
+               asp-route-page="@(currentPage + 1)"
+               asp-route-search="@ViewBag.Search"
+               asp-route-genreId="@ViewBag.GenreId"
+               asp-route-platformId="@ViewBag.PlatformId">
+                Next
+            </a>
+
+            <!-- TOTAL PAGES -->
+            <div>
+                | Total pages: --> @(totalPages) <--
+            </div>
+
+            <!-- GO TO PAGE -->
+            <form asp-action="Index" method="get" class="gv-go-page-form">
+                <h5>Wants to navigate to a specific page?</h5>
+                <input type="text" name="page" min="1" class="form-control gv-page-input" placeholder="Page #" pattern="[0-9]+"
+                    oninvalid="this.setCustomValidity('Only numbers allowed my friend')"
+                    oninput="this.setCustomValidity('')" />
+                <button type="submit" class="btn gv-btn-secondary">Go</button>
+            </form>
+
+        </div>
+    </div>
+</div>

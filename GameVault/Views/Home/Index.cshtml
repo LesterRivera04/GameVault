@@ -1,0 +1,60 @@
+﻿<!-- HERO -->
+
+<section class="gv-hero mt-2">
+
+    <div class="gv-hero-overlay"></div>
+
+    <div class="gv-hero-content">
+
+        <div class="row">
+            <h1 class="gv-title">
+                GameVault
+            </h1>
+
+            <p class="gv-subtitle mt-4 mb-4">
+                Build and organize your personal gaming library.
+            </p>
+
+            <div class="d-flex gap-3">
+
+                <a asp-controller="Games"
+                   asp-action="Index"
+                   class="btn btn-lg gv-btn-primary">
+                    Browse Games
+                </a>
+
+                <a asp-controller="Auth"
+                   asp-action="Register"
+                   class="btn btn-lg gv-btn-secondary">
+                    Create Account
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- TRENDING -->
+
+<section class="container py-5">
+
+    <h2 class="gv-section-title">
+        Trending Games
+    </h2>
+
+    <div class="row g-4">
+
+        @for (int i = 0; i < 4; i++)
+        {
+            <div class="col-md-3">
+
+                <partial name="_GameCardTemporal1" />
+
+            </div>
+        }
+
+    </div>
+
+</section>

@@ -1,0 +1,48 @@
+﻿@model GameVault.Models.GameViewModel
+
+<div class="gv-game-card">
+
+    <img class="gv-game-image"
+         src="@Model.ImageUrl"
+         alt="Game Image"
+         onerror="this.src='/images/GameVault icon.png'" />
+
+    <div class="gv-game-body d-flex flex-column">
+
+        <div class="d-flex justify-content-between align-items-start">
+
+            <h5 class="gv-game-title">
+                @Model.Name
+            </h5>
+
+            <span>
+                ⭐ @Model.Rating
+            </span>
+
+        </div>
+
+        <div class="gv-game-meta mt-2">
+            @(Model.Genres.Any()
+                ? string.Join(" / ", Model.Genres)
+                : "Unknown Genre")
+        </div>
+
+        <div class="gv-game-meta">
+            @(Model.Platforms.Any()
+                ? string.Join(" / ", Model.Platforms)
+                : "Unknown Platform")
+        </div>
+
+        <div class="mt-auto">
+            <div class="gv-game-meta mt-2">
+                @Model.ReleaseDate.Year
+            </div>
+
+            <button class="btn gv-btn-primary w-100 mt-3">
+                Add to Library
+            </button>
+        </div>
+        
+    </div>
+
+</div>
